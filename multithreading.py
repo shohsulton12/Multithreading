@@ -1,30 +1,23 @@
 import threading
-import time
 
-def task1():
-    print("Task 1 started")
-    time.sleep(3)  # Simulate some task
-    print("Task 1 completed")
 
-def task2():
-    print("Task 2 started")
-    time.sleep(5)  # Simulate some task
-    print("Task 2 completed")
+def print_numbers():
+    for i in range(1, 6):
+        print("Thread 1:", i)
 
-def main():
-    # Create threads
-    thread1 = threading.Thread(target=task1)
-    thread2 = threading.Thread(target=task2)
 
-    # Start threads
-    thread1.start()
-    thread2.start()
+def print_letters():
+    for letter in ['a', 'b', 'c', 'd', 'e']:
+        print("Thread 2:", letter)
 
-    # Wait for threads to finish
-    thread1.join()
-    thread2.join()
 
-    print("All tasks completed")
+thread1 = threading.Thread(target=print_numbers)
+thread2 = threading.Thread(target=print_letters)
 
-if __name__ == "__main__":
-    main()
+thread1.start()
+thread2.start()
+
+thread1.join()
+thread2.join()
+
+print("Threads finished its work!")
